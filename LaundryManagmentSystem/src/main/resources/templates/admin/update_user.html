@@ -16,8 +16,13 @@
 
                 <h1>Add Manager</h1>
 
-                <form action="#" method="post" th:action="@{/admin/saveUser}" th:object="${user}">
+                <form action="#" th:action="@{/saveUser}" th:object="${user}"
+			method="POST">
                 
+                <input type="hidden" th:field="*{id}" />
+			
+			<input type="text" th:field="*{firstName}" class="form-control mb-4 col-4">
+			
                     <div class="form-group">
                         <label class="control-label" for="firstName"> First Name </label>
                         <input id="firstName" class="form-control" th:field="*{firstName}" required autofocus="autofocus" />
@@ -33,11 +38,7 @@
                         <input id="email" class="form-control" th:field="*{email}" required autofocus="autofocus" />
                     </div>
 
-                    <div class="form-group mt-3">
-                        <label class="control-label" for="password"> Password </label> 
-                        <input id="password" class="form-control" type="password" th:field="*{password}" required autofocus="autofocus" />
-                    </div>
-
+                 
                     <div class="form-group mt-3">
                         <button style="background-color:#a00b0b; color:white;" type="submit" class="btn btn-block mb-4 ">Save</button>
                     </div>

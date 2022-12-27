@@ -3,6 +3,7 @@ package com.global77.lms.service;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.global77.lms.contoller.dto.UserRegistrationDto;
 import com.global77.lms.model.Role;
@@ -26,6 +28,8 @@ import com.global77.lms.repository.UserRepository;
 public class UserServiceImpl implements UserService {
 
 	private UserRepository userRepository;
+
+	private UserService userService;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -89,6 +93,33 @@ public class UserServiceImpl implements UserService {
 
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 		return this.userRepository.findAll(pageable);
+	}
+
+	@Override
+	public void saveManager(@ModelAttribute("user") User user) {
+		// TODO Auto-generated method stub
+		user.setRoles(Arrays.asList(new Role("ROLE_MANAGER")));
+		// userService.saveManager(user);
+		userRepository.save(user);
+	}
+
+	@Override
+	public void deleteUserById(long id) {
+		// TODO Auto-generated method stub
+		userRepository.deleteById(id);
+	}
+
+	@Override
+	public User getUserById(long id) {
+		// TODO Auto-generated method stub
+		Optional<User> optional = userRepository.findById(id);
+		User user = null;
+		if (optional.isPresent()) {
+			user = optional.get();
+		} else {
+			throw new RuntimeException(" User not found for id :: " + id);
+		}
+		return user;
 	}
 
 }

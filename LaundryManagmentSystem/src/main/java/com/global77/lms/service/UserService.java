@@ -10,8 +10,10 @@ import com.global77.lms.model.User;
 
 public interface UserService extends UserDetailsService {
 	User save(UserRegistrationDto registrationDto);
+	void saveManager(User user);
 	List<User> getAllUsers();
 	Page<User> findPaginated(int pageNo, int pageSize, String sortField,
 			String sortDirection);
-
+	void deleteUserById(long id);
+	User getUserById(long id);
 }
