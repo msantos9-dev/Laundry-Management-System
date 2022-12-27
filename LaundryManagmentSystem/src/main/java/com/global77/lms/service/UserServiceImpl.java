@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 				// Arrays.asList(new Role("ROLE_CUSTOMER"), new
 				// Role("ROLE_ADMIN"),
 				// new Role("ROLE_MANAGER"), new Role("ROLE_OWNER")),
-				Arrays.asList(new Role("ROLE_MANAGER")),
+				Arrays.asList(new Role("ROLE_CUSTOMER")),
 
 				true);
 

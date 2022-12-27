@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,10 +15,8 @@ public class Store {
 	private Long id;
 	private String storeName;
 
-	@OneToOne
-	private User ownerID;
+	private String ownerID;
 
-	@OneToOne
-	private User managerID;
+	private String managerID;
 
 }

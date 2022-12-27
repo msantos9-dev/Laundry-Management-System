@@ -13,8 +13,8 @@ public class Machine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Machine machineID;
-	private User cutomerID;
-	private MachineStatus description;
+	private String machineStatusID;
+	private String cutomerID;
+	private String description;
 
 }
