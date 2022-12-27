@@ -49,14 +49,17 @@
 
                 <div class="d-flex align-items-center">
                     <ul class="navbar-nav me-5 mb-2 mb-lg-0">
-                        <li sec:authorize="hasRole('ROLE_EMPLOYEE')" class="nav-item">
-                            <a class="nav-link" href="/page/employee">Employee</a>
+                        <li sec:authorize="hasRole('ROLE_CUSTOMER')" class="nav-item">
+                            <a class="nav-link" href="/customer/">Customer</a>
                         </li>
                         <li sec:authorize="hasRole('ROLE_MANAGER')" class="nav-item">
-                            <a class="nav-link" href="/page/manager">Managers</a>
+                            <a class="nav-link" href="/manager/">Manager</a>
                         </li>
                         <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
-                            <a class="nav-link" href="/page/admin">Admin</a>
+                            <a class="nav-link" href="/admin/">Admin</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_OWNER')" class="nav-item">
+                            <a class="nav-link" href="/owner/">Owner</a>
                         </li>
                     </ul>
                     <a sec:authorize="isAuthenticated()" th:href="@{/page/all}" role="button" class="me-4">

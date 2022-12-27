@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 				registrationDto.getLastName(), registrationDto.getEmail(),
 				passwordEncoder.encode(registrationDto.getPassword()),
 				Arrays.asList(new Role("ROLE_CUSTOMER"), new Role("ROLE_ADMIN"),
-						new Role("ROLE_ADMIN"), new Role("ROLE_OWNER")));
+						new Role("ROLE_MANAGER"), new Role("ROLE_OWNER")));
 
 		return userRepository.save(user);
 	}
