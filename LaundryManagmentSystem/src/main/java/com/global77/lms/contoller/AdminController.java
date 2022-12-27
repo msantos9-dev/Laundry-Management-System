@@ -54,4 +54,12 @@ public class AdminController {
 		return "admin/index";
 	}
 
+	@GetMapping("/showNewUserForm")
+	public String showNewUserForm(Model model) {
+		// create model attribute to bind form data
+		User user = new User();
+		model.addAttribute("user", user);
+		return "admin/new_user";
+	}
+
 }

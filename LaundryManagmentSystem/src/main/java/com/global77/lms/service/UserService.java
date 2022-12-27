@@ -13,4 +13,5 @@ public interface UserService extends UserDetailsService {
 	List<User> getAllUsers();
 	Page<User> findPaginated(int pageNo, int pageSize, String sortField,
 			String sortDirection);
+
 }
