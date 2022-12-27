@@ -33,6 +33,8 @@ public class User {
 
 	private String password;
 
+	private boolean isEnabled;
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
@@ -42,13 +44,14 @@ public class User {
 	}
 
 	public User(String firstName, String lastName, String email,
-			String password, Collection<Role> roles) {
+			String password, Collection<Role> roles, boolean isEnabled) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
+		this.isEnabled = isEnabled;
 	}
 	public Long getId() {
 		return id;
@@ -85,6 +88,14 @@ public class User {
 	}
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
+	}
+
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
 	}
 
 }

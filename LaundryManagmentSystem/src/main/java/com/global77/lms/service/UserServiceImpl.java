@@ -2,9 +2,14 @@ package com.global77.lms.service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,8 +41,13 @@ public class UserServiceImpl implements UserService {
 		User user = new User(registrationDto.getFirstName(),
 				registrationDto.getLastName(), registrationDto.getEmail(),
 				passwordEncoder.encode(registrationDto.getPassword()),
-				Arrays.asList(new Role("ROLE_CUSTOMER"), new Role("ROLE_ADMIN"),
-						new Role("ROLE_MANAGER"), new Role("ROLE_OWNER")));
+
+				// Arrays.asList(new Role("ROLE_CUSTOMER"), new
+				// Role("ROLE_ADMIN"),
+				// new Role("ROLE_MANAGER"), new Role("ROLE_OWNER")),
+				Arrays.asList(new Role("ROLE_MANAGER")),
+
+				true);
 
 		return userRepository.save(user);
 	}
@@ -61,6 +71,23 @@ public class UserServiceImpl implements UserService {
 		return roles.stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName()))
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		// TODO Auto-generated method stub
+		return userRepository.findAll();
+	}
+
+	@Override
+	public Page<User> findPaginated(int pageNo, int pageSize, String sortField,
+			String sortDirection) {
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name())
+				? Sort.by(sortField).ascending()
+				: Sort.by(sortField).descending();
+
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+		return this.userRepository.findAll(pageable);
 	}
 
 }

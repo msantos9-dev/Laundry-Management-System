@@ -10,6 +10,10 @@ import javax.persistence.Table;
 @Table(name = "role")
 public class Role {
 
+	@Override
+	public String toString() {
+		return name;
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
