@@ -125,8 +125,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllOwners() {
 		// TODO Auto-generated method stub
-		return userRepository.findAll().stream()
-				.filter(i -> i.getRoles().contains("ROLE_OWNER")).toList();
+		return userRepository.findAll();
 	}
 
 }

@@ -15,26 +15,19 @@
 			<thead>
 				<tr>
 					<th>
-						<a th:href="@{'/admin/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+						<a th:href="@{'/admin/page/' + ${currentPage} + '?sortField=storeName&sortDir=' + ${reverseSortDir}}">
 							Store Name</a>
 					</th>
-					<th>
-					<a th:href="@{'/admin/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
-							Owner</a>
-					</th>
-					<th>
-					<a th:href="@{'/admin/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
-							Manager</a>
-					</th>
+					
+					
 					<th> Actions </th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="user : ${listUsers}" th:if="${#strings.contains(user.roles, 'MANAGER')}">
-					<td th:text="${user.firstName}"></td>
-					<td th:text="${user.lastName}"></td>
-					<td th:text="${user.email}"></td>
-					<td> <a th:href="@{/admin/showFormForUpdate/{id}(id=${user.id})}" class="btn btn-primary">Update</a>
+				<tr th:each="store : ${listStores}">
+					<td th:text="${store.storeName}"></td>
+					
+					<td> <a th:href="@{/owner/showFormForStoreUpdate/{id}(id=${store.id})}" class="btn btn-primary">Update</a>
 					 <!-- <a th:href="@{/deleteUser/{id}(id=${user.id})}" class="btn btn-danger">Delete</a> -->
 					    
 					</td>

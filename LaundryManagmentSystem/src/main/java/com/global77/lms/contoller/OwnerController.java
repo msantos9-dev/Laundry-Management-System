@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,13 +29,13 @@ public class OwnerController {
 	@Autowired
 	private UserService userService;
 
-	@ModelAttribute("owners")
+	@ModelAttribute("users")
 	public List<User> myOwners() {
 		List<User> listOwners = new ArrayList<User>();
-		int numManagers = userService.getAllOwners().size();
+		int numOnwers = userService.getAllOwners().size();
 
-		System.out.println(numManagers);
-		for (int i = 0; i < numManagers; i++) {
+		System.out.println("Owners" + numOnwers);
+		for (int i = 0; i < numOnwers; i++) {
 			listOwners.add(userService.getAllOwners().get(i));
 			// System.out.println(learnercourseservice.getAllLearnerCourse().g);
 
@@ -76,6 +77,25 @@ public class OwnerController {
 		Store store = new Store();
 		model.addAttribute("store", store);
 		return "owner/new_store";
+	}
+
+	@PostMapping("/saveStore")
+	public String saveStore(@ModelAttribute("store") Store store) {
+		// save employee to database
+		storeService.saveStore(store);
+		return "redirect:/owner/";
+	}
+
+	@GetMapping("/showFormForStoreUpdate/{id}")
+	public String showFormForUpdate(@PathVariable(value = "id") long id,
+			Model model) {
+
+		// get employee from the service
+		Store store = storeService.getStoreById(id);
+
+		// set employee as a model attribute to pre-populate the form
+		model.addAttribute("store", store);
+		return "owner/update_store";
 	}
 
 }

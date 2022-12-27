@@ -10,4 +10,6 @@ public interface StoreService {
 	List<Store> getAllStores();
 	Page<Store> findPaginated(int pageNo, int pageSize, String sortField,
 			String sortDirection);
+	void saveStore(Store store);
+	Store getStoreById(long id);
 }

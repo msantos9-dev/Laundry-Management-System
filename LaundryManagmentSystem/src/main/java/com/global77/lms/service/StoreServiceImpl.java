@@ -1,6 +1,7 @@
 package com.global77.lms.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,6 +35,25 @@ public class StoreServiceImpl implements StoreService {
 
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 		return this.storeRepository.findAll(pageable);
+	}
+
+	@Override
+	public void saveStore(Store store) {
+		// TODO Auto-generated method stub
+		storeRepository.save(store);
+	}
+
+	@Override
+	public Store getStoreById(long id) {
+		// TODO Auto-generated method stub
+		Optional<Store> optional = storeRepository.findById(id);
+		Store store = null;
+		if (optional.isPresent()) {
+			store = optional.get();
+		} else {
+			throw new RuntimeException(" Store not found for id :: " + id);
+		}
+		return store;
 	}
 
 }
