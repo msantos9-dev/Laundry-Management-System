@@ -12,6 +12,7 @@ public interface UserService extends UserDetailsService {
 	User save(UserRegistrationDto registrationDto);
 	void saveManager(User user);
 	List<User> getAllUsers();
+	List<User> getAllOwners();
 	Page<User> findPaginated(int pageNo, int pageSize, String sortField,
 			String sortDirection);
 	void deleteUserById(long id);
