@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="navbar::html-heading">
+<body>
+<div th:replace="navbar::navbar"></div>
+
+<div class="card w-25 m-auto mt-4 text-center ">
+  <div class="card-body animate__animated animate__backInDown">
+  
+    <p class="card-text">Welcome <span sec:authentication="principal.username"></span></p>
+    <p> You roles are:  <span sec:authentication="principal.authorities"></span></p>
+
+  </div>
+</div>
+</body>
+</html>

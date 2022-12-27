@@ -10,7 +10,7 @@ public class CustomerController {
 
 	@GetMapping("/")
 	public String home() {
-		return "custiner/index";
+		return "customer/index";
 	}
 
 }
