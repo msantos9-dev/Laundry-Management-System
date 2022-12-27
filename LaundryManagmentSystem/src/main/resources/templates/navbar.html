@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head th:fragment="html-heading">
+    <meta charset="ISO-8859-1">
+    <title>Basic Spring Security</title>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet" />
+    
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container">
+            <!-- Navbar brand -->
+            <a class="navbar-brand me-2" href="/">
+                <img src="https://clipartcraft.com/images/m-logo-transparent-4.png" height="28" alt="MDB Logo"
+                    loading="lazy" style="margin-top: -1px;" />
+            </a>
+
+            <!-- Toggle button -->
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">My Spring Security App</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+
+                <div class="d-flex align-items-center">
+                    <ul class="navbar-nav me-5 mb-2 mb-lg-0">
+                        <li sec:authorize="hasRole('ROLE_EMPLOYEE')" class="nav-item">
+                            <a class="nav-link" href="/page/employee">Employee</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_MANAGER')" class="nav-item">
+                            <a class="nav-link" href="/page/manager">Managers</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                            <a class="nav-link" href="/page/admin">Admin</a>
+                        </li>
+                    </ul>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/page/all}" role="button" class="me-4">
+                        <i style="font-size: 25px;  color:#a00b0b;" class="fas fa-user-alt"></i>
+                    </a>
+
+                    <a sec:authorize="isAuthenticated()" th:href="@{/logout}" role="button">
+                        <i style="font-size: 25px;  color:#a00b0b;" class="fas fa-sign-out-alt"></i>
+                    </a>
+
+
+                </div>
+            </div>
+            <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+
+</body>
+
+</html>
