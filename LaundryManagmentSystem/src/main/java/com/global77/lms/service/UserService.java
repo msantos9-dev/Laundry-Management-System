@@ -17,4 +17,5 @@ public interface UserService extends UserDetailsService {
 			String sortDirection);
 	void deleteUserById(long id);
 	User getUserById(long id);
+
 }

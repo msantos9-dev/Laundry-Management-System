@@ -6,7 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
+@Data
 @Table(name = "machine")
 public class Machine {
 
@@ -14,7 +17,7 @@ public class Machine {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String machineStatusID;
-	private String cutomerID;
+	private String storeID;
 	private String description;
 
 }

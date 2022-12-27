@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.global77.lms.model.Machine;
 import com.global77.lms.model.Store;
 import com.global77.lms.model.User;
+import com.global77.lms.service.MachineService;
 import com.global77.lms.service.StoreService;
 import com.global77.lms.service.UserService;
 
@@ -28,6 +30,9 @@ public class OwnerController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private MachineService machineService;
 
 	@ModelAttribute("users")
 	public List<User> myOwners() {
@@ -98,4 +103,32 @@ public class OwnerController {
 		return "owner/update_store";
 	}
 
+	@GetMapping("/machines")
+	public String viewMachines(Model model) {
+		return findPaginatedMachines(1, "description", "asc", model);
+	}
+
+	@GetMapping("/machinesPage/{pageNo}")
+	public String findPaginatedMachines(
+			@PathVariable(value = "pageNo") int pageNo,
+			@RequestParam("sortField") String sortField,
+			@RequestParam("sortDir") String sortDir, Model model) {
+		int pageSize = 5;
+
+		Page<Machine> page = machineService.findPaginatedMachines(pageNo,
+				pageSize, sortField, sortDir);
+		List<Machine> listMachines = page.getContent();
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir",
+				sortDir.equals("asc") ? "desc" : "asc");
+
+		model.addAttribute("listMachines", listMachines);
+		return "owner/machines";
+	}
 }
