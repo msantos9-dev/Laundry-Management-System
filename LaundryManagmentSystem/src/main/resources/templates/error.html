@@ -1,0 +1,79 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- SEO Meta Tags -->
+<meta name="description"
+    content="Tivo is a HTML landing page template built with Bootstrap to help you crate engaging presentations for SaaS apps and convert visitors into users.">
+<meta name="author" content="Inovatik">
+
+<!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+<meta property="og:site_name" content="" /> <!-- website name -->
+<meta property="og:site" content="" /> <!-- website link -->
+<meta property="og:title" content="" /> <!-- title shown in the actual shared post -->
+<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+<meta property="og:type" content="article" />
+<!-- Website Title -->
+<title> Workeache Support</title>
+
+<!-- Styles -->
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+</script>
+<!-- Favicon  -->
+<link rel="icon" href="images/icon.png">
+</head>
+
+<body data-spy="scroll" data-target=".fixed-top"
+    th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+    <style>
+        button:disabled {
+            cursor: not-allowed;
+            pointer-events: all !important;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/app.css')  }}">
+    <title>Error 503</title>
+    <div class="h-screen w-screen bg-gray-100 flex items-center">
+
+        <div class="container flex flex-col md:flex-row items-center justify-center px-5 text-gray-700">
+            <div class="max-w-md">
+
+
+
+                <div class="text-5xl font-dark font-bold">Uppsss...
+
+                    <strong> </strong>
+
+
+                </div>
+                <br />
+                <br />
+                <p class="text-2xl md:text-3xl font-light leading-normal"><strong
+                        th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|"></strong></p>
+                <br />
+                <br />
+
+                <p class="mb-8">Check if the search term is correct. If you think this is an error, contact support
+                    <strong>Thanks!</strong>
+
+                    </br>
+                </p>
+
+                <style>
+                    .pointer {
+                        cursor: pointer;
+                    }
+                </style>
+                <a onclick="history.go(-1)" class="px-4 inline py-2 text-sm font-medium leading-5 shadow text-white transition-colors 
+          duration-150 border border-transparent rounded-lg focus:outline-none focus:shadow-outline-blue 
+          bg-red-600 active:bg-red-600 hover:bg-blue-500 pointer">Go Back</a>
+            </div>
+           
+
+        </div>
+    </div>
+
+</body>
