@@ -182,4 +182,48 @@ public class OwnerController {
 		machineService.saveMachine(machine);
 		return "redirect:/owner/machines";
 	}
+
+	@GetMapping("/showFormForMachineUpdate/{id}")
+	public String showFormForMachineUpdate(@PathVariable(value = "id") long id,
+			Model model) {
+
+		// get employee from the service
+		Machine machine = machineService.getMachineById(id);
+
+		// set employee as a model attribute to pre-populate the form
+		model.addAttribute("machine", machine);
+		return "owner/update_machine";
+	}
+
+	@GetMapping("/machineStatus")
+	public String viewMachineStatus(Model model) {
+		return findPaginatedMachines(1, "statusName", "asc", model);
+	}
+
+	@GetMapping("/machineStatusPage/{pageNo}")
+	public String findPaginatedMachineStatus(
+			@PathVariable(value = "pageNo") int pageNo,
+			@RequestParam("sortField") String sortField,
+			@RequestParam("sortDir") String sortDir, Model model) {
+		int pageSize = 5;
+
+		Page<MachineStatus> page = machineStatusService
+				.findPaginatedMachineStatus(pageNo, pageSize, sortField,
+						sortDir);
+		List<MachineStatus> listMachineStatus = page.getContent();
+
+		System.out.println(page);
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir",
+				sortDir.equals("asc") ? "desc" : "asc");
+
+		model.addAttribute("listMachineStatus", listMachineStatus);
+		return "owner/machinea_status_list";
+	}
 }
