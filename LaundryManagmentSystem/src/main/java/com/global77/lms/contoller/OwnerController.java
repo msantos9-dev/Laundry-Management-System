@@ -197,7 +197,7 @@ public class OwnerController {
 
 	@GetMapping("/machineStatus")
 	public String viewMachineStatus(Model model) {
-		return findPaginatedMachines(1, "statusName", "asc", model);
+		return findPaginatedMachineStatus(1, "statusName", "asc", model);
 	}
 
 	@GetMapping("/machineStatusPage/{pageNo}")
@@ -224,6 +224,6 @@ public class OwnerController {
 				sortDir.equals("asc") ? "desc" : "asc");
 
 		model.addAttribute("listMachineStatus", listMachineStatus);
-		return "owner/machinea_status_list";
+		return "owner/machine_status_list";
 	}
 }

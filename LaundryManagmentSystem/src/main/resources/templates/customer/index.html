@@ -1,3 +1,78 @@
-<html>
-<h1>customer</h1>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="navbar::html-heading">
+<body>
+<div th:replace="navbar::navbar"></div>
+
+
+
+  <div class="container my-2">
+  <div class="row text-center">
+
+</div>
+	<h1>Machine List</h1>
+	
+		<table border="1" class = "table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>
+						<a th:href="@{'/owner/machinesPage/' + ${currentPage} + '?sortField=description&sortDir=' + ${reverseSortDir}}">
+							Description</a>
+					</th>
+					<th>
+						<a th:href="@{'/owner/machinesPage/' + ${currentPage} + '?sortField=machineStatus&sortDir=' + ${reverseSortDir}}">
+							Status</a>
+					</th>
+					<th>
+						<a th:href="@{'/owner/machinesPage/' + ${currentPage} + '?sortField=store&sortDir=' + ${reverseSortDir}}">
+							Store</a>
+					</th>
+					
+					
+					<th> Actions </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="machine : ${listMachines}">
+					<td th:text="${machine.description}"></td>
+					<td th:text="${machine.machineStatus.statusName}"></td>
+					<td th:text="${machine.store.storeName}"></td>
+					
+					<td> <a th:classappend="${machine.machineStatus.statusName != 'AVAILABLE' } ? 'disabled': ''"
+					th:href="@{/owner/showFormForMachineBooking/{id}(id=${machine.id})}" class="btn btn-primary">Book</a>
+					 <!-- <a th:href="@{/deleteUser/{id}(id=${user.id})}" class="btn btn-danger">Delete</a> -->
+					    
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<div th:if = "${totalPages > 1}">
+			<div class = "row col-sm-10">
+				<div class = "col-sm-2">
+					Total Rows: [[${totalItems}]] 
+				</div>
+				<div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/owner/machinesPage/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+				</div>
+				<div class = "col-sm-1">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/owner/machinesPage/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+					<span th:unless="${currentPage < totalPages}">Next</span>
+				</div>
+				
+				 <div class="col-sm-1">
+    				<a th:if="${currentPage < totalPages}" th:href="@{'/owner/machinesPage/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+					<span th:unless="${currentPage < totalPages}">Last</span>
+   				 </div>
+			</div>
+		</div>
+	</div>
+	
+	
+
+</body>
 </html>

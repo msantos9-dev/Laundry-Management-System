@@ -30,7 +30,7 @@
 
                     <div class="form-group">
 					<label>Select Machine Status</label>
-					<select class="form-control" th:field="*{machineStatus}" placeholder="Manager">
+					<select disabled class="form-control" th:field="*{machineStatus}" placeholder="Manager">
 						<option 
 								th:each="status : ${machineStatusList}"
 								th:value="${status.id}"
