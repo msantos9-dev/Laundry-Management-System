@@ -30,7 +30,7 @@
 
                     <div class="form-group">
 					<label>Select Owner</label>
-					<select class="form-control" th:field="*{ownerID}" placeholder="Manager">
+					<select class="form-control" th:field="*{owner}" placeholder="Manager">
 						<option th:if="${#strings.contains(user.roles, 'OWNER')}" 
 								th:each="user : ${users}"
 								th:value="${user.id}"
@@ -41,7 +41,7 @@
 					
 					<div class="form-group">
 					<label>Select Manager</label>
-					<select class="form-control" th:field="*{managerID}" placeholder="Manager">
+					<select class="form-control" th:field="*{manager}" placeholder="Manager">
 						<option th:if="${#strings.contains(user.roles, 'MANAGER')}" 
 								th:each="user : ${users}"
 								th:value="${user.id}"

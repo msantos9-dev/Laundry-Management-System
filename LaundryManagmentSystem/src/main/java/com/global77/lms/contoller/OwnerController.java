@@ -56,9 +56,9 @@ public class OwnerController {
 	@ModelAttribute("machineStatusList")
 	public List<MachineStatus> myMachineStatus() {
 		List<MachineStatus> listMachineStatus = new ArrayList<MachineStatus>();
-		int numMS = machineService.getAllMachines().size();
+		int numMS = machineStatusService.getAllMachineStatus().size();
 
-		System.out.println("Owners" + numMS);
+		System.out.println("Machine Status" + numMS);
 		for (int i = 0; i < numMS; i++) {
 			listMachineStatus
 					.add(machineStatusService.getAllMachineStatus().get(i));
@@ -66,6 +66,20 @@ public class OwnerController {
 
 		}
 		return listMachineStatus;
+	}
+
+	@ModelAttribute("storeList")
+	public List<Store> myStoreList() {
+		List<Store> listStores = new ArrayList<Store>();
+		int numMS = storeService.getAllStores().size();
+
+		System.out.println("Machine Status" + numMS);
+		for (int i = 0; i < numMS; i++) {
+			listStores.add(storeService.getAllStores().get(i));
+			// System.out.println(learnercourseservice.getAllLearnerCourse().g);
+
+		}
+		return listStores;
 	}
 
 	@GetMapping("/")
@@ -138,6 +152,8 @@ public class OwnerController {
 		Page<Machine> page = machineService.findPaginatedMachines(pageNo,
 				pageSize, sortField, sortDir);
 		List<Machine> listMachines = page.getContent();
+
+		System.out.println(page);
 
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("totalPages", page.getTotalPages());

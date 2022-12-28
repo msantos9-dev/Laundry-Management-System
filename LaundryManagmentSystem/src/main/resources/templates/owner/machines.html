@@ -38,9 +38,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="machine : ${listmachines}">
+				<tr th:each="machine : ${listMachines}">
 					<td th:text="${machine.description}"></td>
-					<td th:text="${machine.status..owner.statusName}"></td>
+					<td th:text="${machine.machineStatus.statusName}"></td>
 					<td th:text="${machine.store.storeName}"></td>
 					
 					<td> <a th:href="@{/owner/showFormForMachineUpdate/{id}(id=${machine.id})}" class="btn btn-primary">Update</a>

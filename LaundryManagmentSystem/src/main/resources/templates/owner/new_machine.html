@@ -27,7 +27,7 @@
 					<label>Select Machine Status</label>
 					<select class="form-control" th:field="*{machineStatus}" placeholder="Manager">
 						<option 
-								th:each="status : ${listMachineStatus}"
+								th:each="status : ${machineStatusList}"
 								th:value="${status.id}"
 								th:text="${status.statusName}">
 						</option>
@@ -38,9 +38,9 @@
 					<label>Select Store</label>
 					<select class="form-control" th:field="*{store}" placeholder="Manager">
 						<option 
-								th:each="store : ${listStores}"
+								th:each="store : ${storeList}"
 								th:value="${store.id}"
-								th:text="${store.storeName} + ' ' + ${user.lastName}">
+								th:text="${store.storeName}">
 						</option>
 					</select>
 					</div>
