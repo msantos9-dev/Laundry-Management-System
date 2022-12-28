@@ -12,4 +12,5 @@ public interface StoreService {
 			String sortDirection);
 	void saveStore(Store store);
 	Store getStoreById(long id);
+
 }

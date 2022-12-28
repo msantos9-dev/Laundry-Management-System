@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.global77.lms.model.Machine;
+import com.global77.lms.model.MachineStatus;
 import com.global77.lms.model.Store;
 import com.global77.lms.model.User;
 import com.global77.lms.service.MachineService;
+import com.global77.lms.service.MachineStatusService;
 import com.global77.lms.service.StoreService;
 import com.global77.lms.service.UserService;
 
@@ -34,6 +36,9 @@ public class OwnerController {
 	@Autowired
 	private MachineService machineService;
 
+	@Autowired
+	private MachineStatusService machineStatusService;
+
 	@ModelAttribute("users")
 	public List<User> myOwners() {
 		List<User> listOwners = new ArrayList<User>();
@@ -46,6 +51,21 @@ public class OwnerController {
 
 		}
 		return listOwners;
+	}
+
+	@ModelAttribute("machineStatusList")
+	public List<MachineStatus> myMachineStatus() {
+		List<MachineStatus> listMachineStatus = new ArrayList<MachineStatus>();
+		int numMS = machineService.getAllMachines().size();
+
+		System.out.println("Owners" + numMS);
+		for (int i = 0; i < numMS; i++) {
+			listMachineStatus
+					.add(machineStatusService.getAllMachineStatus().get(i));
+			// System.out.println(learnercourseservice.getAllLearnerCourse().g);
+
+		}
+		return listMachineStatus;
 	}
 
 	@GetMapping("/")
@@ -130,5 +150,20 @@ public class OwnerController {
 
 		model.addAttribute("listMachines", listMachines);
 		return "owner/machines";
+	}
+
+	@GetMapping("/showNewMachineForm")
+	public String showNewMachineForm(Model model) {
+		// create model attribute to bind form data
+		Machine machine = new Machine();
+		model.addAttribute("machine", machine);
+		return "owner/new_machine";
+	}
+
+	@PostMapping("/saveMachine")
+	public String saveMachine(@ModelAttribute("machine") Machine machine) {
+		// save employee to database
+		machineService.saveMachine(machine);
+		return "redirect:/owner/machines";
 	}
 }

@@ -14,33 +14,33 @@
                 <!-- success message -->
     
 
-                <h1>Add Store</h1>
+                <h1>Add Machine</h1>
 
-                <form action="#" method="post" th:action="@{/owner/saveStore}" th:object="${store}">
+                <form action="#" method="post" th:action="@{/owner/saveMachine}" th:object="${machine}">
                 
                     <div class="form-group">
-                        <label class="control-label" for="firstName"> Store Name </label>
-                        <input id="firstName" class="form-control" th:field="*{storeName}" required autofocus="autofocus" />
+                        <label class="control-label" for="firstName"> Machine Desciption </label>
+                        <input id="firstName" class="form-control" th:field="*{description}" required autofocus="autofocus" />
                     </div>
 					
 					<div class="form-group">
-					<label>Select Owner</label>
-					<select class="form-control" th:field="*{owner}" placeholder="Manager">
-						<option th:if="${#strings.contains(user.roles, 'OWNER')}" 
-								th:each="user : ${users}"
-								th:value="${user.id}"
-								th:text="${user.firstName} + ' ' + ${user.lastName}">
+					<label>Select Machine Status</label>
+					<select class="form-control" th:field="*{machineStatus}" placeholder="Manager">
+						<option 
+								th:each="status : ${listMachineStatus}"
+								th:value="${status.id}"
+								th:text="${status.statusName}">
 						</option>
 					</select>
 					</div>
 					
 					<div class="form-group">
-					<label>Select Manager</label>
-					<select class="form-control" th:field="*{manager}" placeholder="Manager">
-						<option th:if="${#strings.contains(user.roles, 'MANAGER')}" 
-								th:each="user : ${users}"
-								th:value="${user.id}"
-								th:text="${user.firstName} + ' ' + ${user.lastName}">
+					<label>Select Store</label>
+					<select class="form-control" th:field="*{store}" placeholder="Manager">
+						<option 
+								th:each="store : ${listStores}"
+								th:value="${store.id}"
+								th:text="${store.storeName} + ' ' + ${user.lastName}">
 						</option>
 					</select>
 					</div>

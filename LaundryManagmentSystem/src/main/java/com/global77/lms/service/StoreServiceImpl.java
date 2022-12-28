@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.global77.lms.model.Store;
+import com.global77.lms.repository.MachineRepository;
 import com.global77.lms.repository.StoreRepository;
 
 @Service
@@ -18,6 +19,9 @@ public class StoreServiceImpl implements StoreService {
 
 	@Autowired
 	private StoreRepository storeRepository;
+
+	@Autowired
+	private MachineRepository machineRepository;
 
 	@Override
 	public List<Store> getAllStores() {

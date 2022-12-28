@@ -9,28 +9,28 @@
 
   <div class="container my-2">
   <div class="row text-center">
-  <div class="col-md-4"><a th:href = "@{/owner/machines}" class="btn btn-primary btn-sm mb-3 btn-block"> List of Machines </a></div>
+  <div class="col-md-4"><a th:href = "@{/owner/}" class="btn btn-primary btn-sm mb-3 btn-block"> List of Stores </a></div>
   <div class="col-md-4"><a th:href = "@{/owner/showNewStoreForm}" class="btn btn-primary btn-sm mb-3 btn-block"> Machine Status List </a></div>
   <div class="col-md-4"><a th:href = "@{/owner/showNewStoreForm}" class="btn btn-primary btn-sm mb-3 btn-block"> Sales </a></div>
 </div>
 	<h1>Store List</h1>
 	
-	<a th:href = "@{/owner/showNewStoreForm}" class="btn btn-primary btn-sm mb-3"> Add Store </a>
+	<a th:href = "@{/owner/showNewMachineForm}" class="btn btn-primary btn-sm mb-3"> Add Machine </a>
 	
 		<table border="1" class = "table table-striped table-responsive-md">
 			<thead>
 				<tr>
 					<th>
-						<a th:href="@{'/owner/page/' + ${currentPage} + '?sortField=storeName&sortDir=' + ${reverseSortDir}}">
-							Name</a>
+						<a th:href="@{'/owner/machinesPage/' + ${currentPage} + '?sortField=description&sortDir=' + ${reverseSortDir}}">
+							Description</a>
 					</th>
 					<th>
-						<a th:href="@{'/owner/page/' + ${currentPage} + '?sortField=owner&sortDir=' + ${reverseSortDir}}">
-							Owner</a>
+						<a th:href="@{'/owner/machinesPage/' + ${currentPage} + '?sortField=machineStatus&sortDir=' + ${reverseSortDir}}">
+							Status</a>
 					</th>
 					<th>
-						<a th:href="@{'/owner/page/' + ${currentPage} + '?sortField=manager&sortDir=' + ${reverseSortDir}}">
-							Manager</a>
+						<a th:href="@{'/owner/machinesPage/' + ${currentPage} + '?sortField=store&sortDir=' + ${reverseSortDir}}">
+							Store</a>
 					</th>
 					
 					
@@ -38,12 +38,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="store : ${listStores}">
-					<td th:text="${store.storeName}"></td>
-					<td th:text="${store.owner.firstName + ' ' + store.owner.lastName}"></td>
-					<td th:text="${store.manager.firstName + ' ' + store.manager.lastName}"></td>
+				<tr th:each="machine : ${listmachines}">
+					<td th:text="${machine.description}"></td>
+					<td th:text="${machine.status..owner.statusName}"></td>
+					<td th:text="${machine.store.storeName}"></td>
 					
-					<td> <a th:href="@{/owner/showFormForStoreUpdate/{id}(id=${store.id})}" class="btn btn-primary">Update</a>
+					<td> <a th:href="@{/owner/showFormForMachineUpdate/{id}(id=${machine.id})}" class="btn btn-primary">Update</a>
 					 <!-- <a th:href="@{/deleteUser/{id}(id=${user.id})}" class="btn btn-danger">Delete</a> -->
 					    
 					</td>
@@ -58,17 +58,17 @@
 				</div>
 				<div class = "col-sm-1">
 					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-						<a th:if="${currentPage != i}" th:href="@{'/admin/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<a th:if="${currentPage != i}" th:href="@{'/owner/machinesPage/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
 						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
 					</span>
 				</div>
 				<div class = "col-sm-1">
-					<a th:if="${currentPage < totalPages}" th:href="@{'/admin/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+					<a th:if="${currentPage < totalPages}" th:href="@{'/owner/machinesPage/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
 					<span th:unless="${currentPage < totalPages}">Next</span>
 				</div>
 				
 				 <div class="col-sm-1">
-    				<a th:if="${currentPage < totalPages}" th:href="@{'/admin/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+    				<a th:if="${currentPage < totalPages}" th:href="@{'/owner/machinesPage/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
 					<span th:unless="${currentPage < totalPages}">Last</span>
    				 </div>
 			</div>

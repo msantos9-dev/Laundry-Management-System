@@ -6,7 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
+@Data
 @Table(name = "machineStatus")
 public class MachineStatus {
 
@@ -14,5 +17,5 @@ public class MachineStatus {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String statusName;
-	
+
 }
